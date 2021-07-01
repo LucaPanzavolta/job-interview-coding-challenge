@@ -1,4 +1,3 @@
-
 /* 
     The last position before a robot trips over the edge of the planet will be recorded in the "scents" object
     in the following format: 
@@ -30,7 +29,7 @@ function moveForward([x, y, orientation]) {
     case "W":
       return [x - 1, y, orientation];
     default:
-      throw new Error("The orientation passed is not a valid value.");
+      throw new Error("The orientation passed in is not a valid value.");
   }
 }
 
@@ -45,7 +44,7 @@ function turnLeft([x, y, orientation]) {
     case "W":
       return [x, y, "S"];
     default:
-      throw new Error("The orientation passed is not a valid value.");
+      throw new Error("The orientation passed in is not a valid value.");
   }
 }
 
@@ -60,7 +59,7 @@ function turnRight([x, y, orientation]) {
     case "W":
       return [x, y, "N"];
     default:
-      throw new Error("The orientation passed is not a valid value.");
+      throw new Error("The orientation passed in is not a valid value.");
   }
 }
 
@@ -81,6 +80,21 @@ function mapInstructionToFunction(newInstruction) {
   throw new Error("Invalid Instruction.");
 }
 
+function logPositionAfterInstruction(newPosition, instruction) {
+  console.log("New position at: ", newPosition, "after perfoming instruction: ", instruction);
+}
+
+function logFinalPosition(finalPosition) {
+  console.log("Final position at: ", finalPosition, "\n\n\n");
+}
+
+/*
+  the "processRobotInstructions" function accepts (in order) the following arguments:
+  [x, y, orientation] => which represents the starting position and orientation of the robot
+  instructionString => a string containing a series of moves the robot has to perform (example: "FFLRLFF")
+  matrixSize => the most top right coordinate in the matrix (example : [5, 3]),
+  scents => an object that tracks the previous scents left by the lost robots
+*/
 
 function processRobotInstructions([x, y, orientation], instructionString, matrixSize, scents) {
   let isRobotLost = false;
@@ -109,19 +123,19 @@ function processRobotInstructions([x, y, orientation], instructionString, matrix
           isRobotLost = true;
           scents[currentX] = { [currentY]: true };
         } else {
-          // there was a smell in the current position of the robot, so we can ignore the instruction and return current position
-          console.log(accumulator)
+          // there was a smell in the current position of the robot, so we can ignore the instruction and return current position (contained in the accumulator)
+          logPositionAfterInstruction(accumulator, instruction)
           return accumulator
         }
       }
     }
 
-    console.log(robotPositionAfterMove);
+    logPositionAfterInstruction(robotPositionAfterMove, instruction);
     return robotPositionAfterMove;
   }, [x, y, orientation]);
 
   const result = isRobotLost ? finalRobotPosition.concat("LOST") : finalRobotPosition;
-  console.log({ result }, "\n\n\n");
+  logFinalPosition(result);
   return result;
 }
 
