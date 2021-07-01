@@ -2,7 +2,7 @@
 
 ## How to run the project
 
-1. `git clone` to clone the repo on your local machine
+1. `git clone https://github.com/LucaPanzavolta/job-interview-coding-challenge.git` to clone the repo on your local machine
 2. `npm install` to install the required dependencies
 
 ## How to run the sample input
