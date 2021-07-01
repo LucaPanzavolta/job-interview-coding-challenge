@@ -1,0 +1,16 @@
+{
+  "name": "coding-challenge-job-interview",
+  "version": "1.0.0",
+  "description": "Coding Challenge for GuideSmiths",
+  "main": "martianRobots.js",
+  "dependencies": {
+    "jest": "^27.0.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node runRobotInstructions.js",
+    "test": "jest --silent"
+  },
+  "author": "Luca Panzavolta",
+  "license": "ISC"
+}
